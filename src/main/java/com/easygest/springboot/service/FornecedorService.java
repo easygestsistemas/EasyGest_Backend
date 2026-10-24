@@ -27,7 +27,7 @@ public class FornecedorService {
     }
 
     // BUSCAR POR ID
-    public Fornecedor buscarPorId(Long codFornecedor) {
+    public Fornecedor buscarPorId(String codFornecedor) {
 
         return repository.findById(codFornecedor)
                 .orElseThrow();
@@ -35,7 +35,7 @@ public class FornecedorService {
 
     // ATUALIZAR
    public Fornecedor atualizar(
-        Long codFornecedor,
+        String codFornecedor,
         Fornecedor fornecedor) {
 
     Fornecedor fornecedorExistente =
@@ -66,7 +66,7 @@ public class FornecedorService {
 }
 
     // DELETAR
-    public void deletar(Long codFornecedor) {
+    public void deletar(String codFornecedor) {
 
         repository.deleteById(codFornecedor);
     }

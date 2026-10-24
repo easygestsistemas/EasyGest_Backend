@@ -23,7 +23,7 @@ public class FornecedorController {
 
     @GetMapping("/{codFornecedor}")
     public Fornecedor buscarPorId(
-            @PathVariable Long codFornecedor) {
+            @PathVariable String codFornecedor) {
 
         return service.buscarPorId(codFornecedor);
     }
@@ -37,7 +37,7 @@ public class FornecedorController {
 
     @PutMapping("/{codFornecedor}")
     public Fornecedor atualizar(
-            @PathVariable Long codFornecedor,
+            @PathVariable String codFornecedor,
             @RequestBody Fornecedor fornecedor) {
 
         return service.atualizar(
@@ -47,7 +47,7 @@ public class FornecedorController {
 
     @DeleteMapping("/{codFornecedor}")
     public void deletar(
-            @PathVariable Long codFornecedor) {
+            @PathVariable String codFornecedor) {
 
         service.deletar(codFornecedor);
     }

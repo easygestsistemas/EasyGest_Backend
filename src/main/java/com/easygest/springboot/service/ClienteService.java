@@ -27,14 +27,14 @@ public class ClienteService {
     }
 
     // BUSCAR POR ID
-    public Cliente buscarPorId(Long codCliente) {
+    public Cliente buscarPorId(String codCliente) {
 
         return repository.findById(codCliente)
                 .orElseThrow();
     }
 
     // ATUALIZAR
-    public Cliente atualizar(Long codCliente, Cliente cliente) {
+    public Cliente atualizar(String codCliente, Cliente cliente) {
 
     Cliente clienteExistente =
             buscarPorId(codCliente);
@@ -51,7 +51,7 @@ public class ClienteService {
 }
 
     // DELETAR
-    public void deletar(Long codCliente) {
+    public void deletar(String codCliente) {
 
         repository.deleteById(codCliente);
     }

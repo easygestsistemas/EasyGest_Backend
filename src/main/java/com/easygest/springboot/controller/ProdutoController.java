@@ -23,7 +23,7 @@ public class ProdutoController {
 
     @GetMapping("/{codProduto}")
     public Produto buscarPorCodigo(
-            @PathVariable Long codProduto) {
+            @PathVariable String codProduto) {
 
         return produtoService.buscarPorCod(codProduto);
     }
@@ -37,7 +37,7 @@ public class ProdutoController {
 
     @PutMapping("/{codProduto}")
     public Produto atualizar(
-            @PathVariable Long codProduto,
+            @PathVariable String codProduto,
             @RequestBody Produto produto) {
 
         return produtoService.atualizar(
@@ -47,7 +47,7 @@ public class ProdutoController {
 
     @DeleteMapping("/{codProduto}")
     public void excluir(
-            @PathVariable Long codProduto) {
+            @PathVariable String codProduto) {
 
         produtoService.excluir(codProduto);
     }

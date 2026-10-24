@@ -23,7 +23,7 @@ public class FuncionarioController {
 
     @GetMapping("/{codFuncionario}")
     public Funcionario buscarPorId(
-            @PathVariable Long codFuncionario) {
+            @PathVariable String codFuncionario) {
 
         return service.buscarPorId(codFuncionario);
     }
@@ -37,7 +37,7 @@ public class FuncionarioController {
 
     @PutMapping("/{codFuncionario}")
     public Funcionario atualizar(
-            @PathVariable Long codFuncionario,
+            @PathVariable String codFuncionario,
             @RequestBody Funcionario funcionario) {
 
         return service.atualizar(
@@ -47,7 +47,7 @@ public class FuncionarioController {
 
     @DeleteMapping("/{codFuncionario}")
     public void deletar(
-            @PathVariable Long codFuncionario) {
+            @PathVariable String codFuncionario) {
 
         service.deletar(codFuncionario);
     }

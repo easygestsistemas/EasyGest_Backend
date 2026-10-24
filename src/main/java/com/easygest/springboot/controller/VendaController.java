@@ -27,7 +27,7 @@ public class VendaController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
+    public void deletar(@PathVariable String id) {
         service.deletar(id);
     }
 }

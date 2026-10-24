@@ -37,7 +37,7 @@ public class ItemVendaController {
 
     @DeleteMapping("/{id}")
     public void deletar(
-            @PathVariable Long id) {
+            @PathVariable String id) {
 
         service.deletar(id);
     }

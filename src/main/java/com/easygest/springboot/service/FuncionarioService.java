@@ -38,14 +38,14 @@ public class FuncionarioService {
     }
 
     // BUSCAR POR ID
-    public Funcionario buscarPorId(Long codFuncionario) {
+    public Funcionario buscarPorId(String codFuncionario) {
 
         return funcionarioRepository.findById(codFuncionario)
                 .orElseThrow();
     }
 
     // ATUALIZAR
-    public Funcionario atualizar(Long codFuncionario, Funcionario funcionario) {
+    public Funcionario atualizar(String codFuncionario, Funcionario funcionario) {
 
         Funcionario funcionarioExistente = buscarPorId(codFuncionario);
 
@@ -71,7 +71,7 @@ public class FuncionarioService {
     }
 
     // DELETAR
-    public void deletar(Long codFuncionario) {
+    public void deletar(String codFuncionario) {
 
         funcionarioRepository.deleteById(codFuncionario);
     }

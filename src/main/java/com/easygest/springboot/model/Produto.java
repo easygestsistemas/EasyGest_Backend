@@ -3,12 +3,8 @@ package com.easygest.springboot.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,12 +14,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Document(collection = "produtos")
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codProduto;
+    private String codProduto;
 
     private String nomeProduto;
     private String tipoProduto;
@@ -38,8 +33,6 @@ public class Produto {
     private BigDecimal quantidadeAtual;
     private Integer estoqueMinimo;
 
-    @ManyToOne
-    @JoinColumn(name = "codFornecedor")
     private Fornecedor fornecedor;
 
 }

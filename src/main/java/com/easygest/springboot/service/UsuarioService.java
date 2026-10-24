@@ -25,13 +25,13 @@ public class UsuarioService {
     }
 
     // BUSCAR POR ID
-    public Usuario buscarPorId(Long codUsuario) {
+    public Usuario buscarPorId(String codUsuario) {
         return repository.findById(codUsuario)
                 .orElseThrow();
     }
 
     // ATUALIZAR
-    public Usuario atualizar(Long codUsuario, Usuario usuario) {
+    public Usuario atualizar(String codUsuario, Usuario usuario) {
 
         Usuario usuarioExistente =
                 buscarPorId(codUsuario);
@@ -43,7 +43,7 @@ public class UsuarioService {
     }
 
     // DELETAR
-    public void deletar(Long codUsuario) {
+    public void deletar(String codUsuario) {
         repository.deleteById(codUsuario);
     }
 }

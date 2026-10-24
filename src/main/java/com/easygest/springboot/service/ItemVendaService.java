@@ -66,7 +66,7 @@ public class ItemVendaService {
         return repository.save(itemVenda);
     }
 
-    public void deletar(Long codItemVenda) {
+    public void deletar(String codItemVenda) {
         repository.deleteById(codItemVenda);
     }
 }

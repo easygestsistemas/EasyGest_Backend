@@ -23,7 +23,7 @@ public class UsuarioController {
 
     @GetMapping("/{codUsuario}")
     public Usuario buscarPorId(
-            @PathVariable Long codUsuario) {
+            @PathVariable String codUsuario) {
 
         return service.buscarPorId(codUsuario);
     }
@@ -37,7 +37,7 @@ public class UsuarioController {
 
     @PutMapping("/{codUsuario}")
     public Usuario atualizar(
-            @PathVariable Long codUsuario,
+            @PathVariable String codUsuario,
             @RequestBody Usuario usuario) {
 
         return service.atualizar(
@@ -47,7 +47,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{codUsuario}")
     public void deletar(
-            @PathVariable Long codUsuario) {
+            @PathVariable String codUsuario) {
 
         service.deletar(codUsuario);
     }

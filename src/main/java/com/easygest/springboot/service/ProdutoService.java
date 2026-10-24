@@ -29,7 +29,7 @@ public class ProdutoService {
     }
 
     // BUSCAR POR CÓDIGO
-    public Produto buscarPorCod(Long codProduto) {
+    public Produto buscarPorCod(String codProduto) {
 
         return produtoRepository.findById(codProduto)
                 .orElseThrow(() ->
@@ -37,7 +37,7 @@ public class ProdutoService {
     }
 
     // ATUALIZAR
-    public Produto atualizar(Long codProduto, Produto novo) {
+    public Produto atualizar(String codProduto, Produto novo) {
 
         Produto existente = buscarPorCod(codProduto);
 
@@ -66,7 +66,7 @@ public class ProdutoService {
     }
 
     // EXCLUIR
-    public void excluir(Long codProduto) {
+    public void excluir(String codProduto) {
 
         produtoRepository.deleteById(codProduto);
     }

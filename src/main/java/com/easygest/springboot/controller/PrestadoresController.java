@@ -23,7 +23,7 @@ public class PrestadoresController {
 
     @GetMapping("/{codPrestador}")
     public Prestadores buscarPorId(
-            @PathVariable Long codPrestador) {
+            @PathVariable String codPrestador) {
 
         return service.buscarPorId(codPrestador);
     }
@@ -37,7 +37,7 @@ public class PrestadoresController {
 
     @PutMapping("/{codPrestador}")
     public Prestadores atualizar(
-            @PathVariable Long codPrestador,
+            @PathVariable String codPrestador,
             @RequestBody Prestadores prestador) {
 
         return service.atualizar(
@@ -47,7 +47,7 @@ public class PrestadoresController {
 
     @DeleteMapping("/{codPrestador}")
     public void deletar(
-            @PathVariable Long codPrestador) {
+            @PathVariable String codPrestador) {
 
         service.deletar(codPrestador);
     }

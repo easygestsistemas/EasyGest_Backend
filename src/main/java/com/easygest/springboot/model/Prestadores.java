@@ -5,10 +5,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +17,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Document(collection = "prestadores")
 public class Prestadores {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codPrestador;
+    private String codPrestador;
     private String razaoSocialPrestador;
     private String nomePrestador;
     private String cnpjPrestador;

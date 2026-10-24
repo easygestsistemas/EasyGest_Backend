@@ -22,7 +22,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{codCliente}")
-    public Cliente buscarPorId(@PathVariable Long codCliente) {
+    public Cliente buscarPorId(@PathVariable String codCliente) {
         return service.buscarPorId(codCliente);
     }
 
@@ -33,14 +33,14 @@ public class ClienteController {
 
     @PutMapping("/{codCliente}")
     public Cliente atualizar(
-            @PathVariable Long codCliente,
+            @PathVariable String codCliente,
             @RequestBody Cliente cliente) {
 
         return service.atualizar(codCliente, cliente);
     }
 
     @DeleteMapping("/{codCliente}")
-    public void deletar(@PathVariable Long codCliente) {
+    public void deletar(@PathVariable String codCliente) {
         service.deletar(codCliente);
     }
 }

@@ -35,12 +35,12 @@ public class VendaService {
     return repository.save(venda);
 }
 
-    public Venda buscarPorId(Long codVenda) {
+    public Venda buscarPorId(String codVenda) {
         return repository.findById(codVenda)
                 .orElseThrow();
     }
 
-    public void deletar(Long codVenda) {
+    public void deletar(String codVenda) {
         repository.deleteById(codVenda);
     }
 }

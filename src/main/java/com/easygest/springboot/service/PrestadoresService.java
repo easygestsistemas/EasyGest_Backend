@@ -27,7 +27,7 @@ public class PrestadoresService {
     }
 
     // BUSCAR POR ID
-    public Prestadores buscarPorId(Long codPrestador) {
+    public Prestadores buscarPorId(String codPrestador) {
 
         return repository.findById(codPrestador)
                 .orElseThrow();
@@ -35,7 +35,7 @@ public class PrestadoresService {
 
     // ATUALIZAR
     public Prestadores atualizar(
-            Long codPrestador,
+            String codPrestador,
             Prestadores prestador) {
 
         Prestadores prestadorExistente =
@@ -75,7 +75,7 @@ public class PrestadoresService {
     }
 
     // DELETAR
-    public void deletar(Long codPrestador) {
+    public void deletar(String codPrestador) {
 
         repository.deleteById(codPrestador);
     }
