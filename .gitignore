@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Local Documentation & Sensitive Files ###
+DIARIO_DE_BORDO_LOCAL.md
+*LOCAL.md
+.env
+.env.local
+application-local.properties
