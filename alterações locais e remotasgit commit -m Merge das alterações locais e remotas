@@ -1,0 +1,22 @@
+ README.md                                          | 33 [32m++++++++++++[m[31m-[m
+ pom.xml                                            |  9 [32m+++[m[31m-[m
+ .../easygest/springboot/config/SecurityConfig.java | 52 [32m++++++++++++++++++++[m
+ .../springboot/controller/ClienteController.java   |  6 [32m++[m[31m-[m
+ .../controller/FornecedorController.java           |  6 [32m++[m[31m-[m
+ .../controller/FuncionarioController.java          |  6 [32m++[m[31m-[m
+ .../springboot/controller/ItemVendaController.java |  6 [32m++[m[31m-[m
+ .../controller/PrestadoresController.java          |  6 [32m++[m[31m-[m
+ .../springboot/controller/ProdutoController.java   |  6 [32m++[m[31m-[m
+ .../springboot/controller/UsuarioController.java   |  6 [32m++[m[31m-[m
+ .../springboot/controller/VendaController.java     |  6 [32m++[m[31m-[m
+ .../com/easygest/springboot/model/Cliente.java     |  4 [32m++[m
+ .../com/easygest/springboot/model/Fornecedor.java  |  4 [32m++[m
+ .../com/easygest/springboot/model/Funcionario.java |  6 [32m++[m[31m-[m
+ .../com/easygest/springboot/model/ItemVenda.java   |  9 [32m++++[m
+ .../com/easygest/springboot/model/Prestadores.java |  6 [32m+++[m
+ .../com/easygest/springboot/model/Produto.java     |  8 [32m++++[m
+ .../com/easygest/springboot/model/Usuario.java     |  3 [32m++[m
+ .../java/com/easygest/springboot/model/Venda.java  |  2 [32m+[m
+ .../springboot/SecurityAndValidationTests.java     | 55 [32m++++++++++++++++++++++[m
+ .../springboot/SpringbootApplicationTests.java     |  6 [32m++[m[31m-[m
+ 21 files changed, 225 insertions(+), 20 deletions(-)
