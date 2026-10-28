@@ -23,24 +23,37 @@ public class VendaService {
         return repository.findAll();
     }
 
-
     public Venda salvar(Venda venda) {
-
-    Cliente clienteBanco = clienteRepository
-            .findById(venda.getCliente().getCodCliente())
-            .orElseThrow();
-
-    venda.setCliente(clienteBanco);
-
-    return repository.save(venda);
-}
+        venda.setCliente(buscarCliente(venda));
+        return repository.save(venda);
+    }
 
     public Venda buscarPorId(String codVenda) {
         return repository.findById(codVenda)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Venda não encontrada."));
+    }
+
+    public Venda atualizar(String codVenda, Venda venda) {
+        Venda vendaExistente = buscarPorId(codVenda);
+
+        vendaExistente.setDataVenda(venda.getDataVenda());
+        vendaExistente.setValorTotal(venda.getValorTotal());
+        vendaExistente.setStatus(venda.getStatus());
+        vendaExistente.setCliente(buscarCliente(venda));
+
+        return repository.save(vendaExistente);
     }
 
     public void deletar(String codVenda) {
         repository.deleteById(codVenda);
+    }
+
+    private Cliente buscarCliente(Venda venda) {
+        if (venda.getCliente() == null || venda.getCliente().getCodCliente() == null) {
+            throw new IllegalArgumentException("O código do cliente é obrigatório.");
+        }
+
+        return clienteRepository.findById(venda.getCliente().getCodCliente())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado."));
     }
 }

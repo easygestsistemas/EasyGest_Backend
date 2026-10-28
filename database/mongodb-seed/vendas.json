@@ -1,0 +1,162 @@
+[
+  {
+    "_id": "VEN-001",
+    "dataVenda": "2026-03-01",
+    "valorTotal": 16.5,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-001",
+      "nomeCliente": "Cliente Exemplo 01",
+      "cpfCliente": "10000000001",
+      "enderecoCliente": "Rua das Flores, 101 - Centro",
+      "telefoneCliente": "11990000001",
+      "emailCliente": "cliente01@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-01"
+    }
+  },
+  {
+    "_id": "VEN-002",
+    "dataVenda": "2026-03-02",
+    "valorTotal": 28.5,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-002",
+      "nomeCliente": "Cliente Exemplo 02",
+      "cpfCliente": "10000000002",
+      "enderecoCliente": "Rua das Flores, 102 - Centro",
+      "telefoneCliente": "11990000002",
+      "emailCliente": "cliente02@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-02"
+    }
+  },
+  {
+    "_id": "VEN-003",
+    "dataVenda": "2026-03-03",
+    "valorTotal": 43.0,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-003",
+      "nomeCliente": "Cliente Exemplo 03",
+      "cpfCliente": "10000000003",
+      "enderecoCliente": "Rua das Flores, 103 - Centro",
+      "telefoneCliente": "11990000003",
+      "emailCliente": "cliente03@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-03"
+    }
+  },
+  {
+    "_id": "VEN-004",
+    "dataVenda": "2026-03-04",
+    "valorTotal": 60.0,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-004",
+      "nomeCliente": "Cliente Exemplo 04",
+      "cpfCliente": "10000000004",
+      "enderecoCliente": "Rua das Flores, 104 - Centro",
+      "telefoneCliente": "11990000004",
+      "emailCliente": "cliente04@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-04"
+    }
+  },
+  {
+    "_id": "VEN-005",
+    "dataVenda": "2026-03-05",
+    "valorTotal": 13.25,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-005",
+      "nomeCliente": "Cliente Exemplo 05",
+      "cpfCliente": "10000000005",
+      "enderecoCliente": "Rua das Flores, 105 - Centro",
+      "telefoneCliente": "11990000005",
+      "emailCliente": "cliente05@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-05"
+    }
+  },
+  {
+    "_id": "VEN-006",
+    "dataVenda": "2026-03-06",
+    "valorTotal": 29.0,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-006",
+      "nomeCliente": "Cliente Exemplo 06",
+      "cpfCliente": "10000000006",
+      "enderecoCliente": "Rua das Flores, 106 - Centro",
+      "telefoneCliente": "11990000006",
+      "emailCliente": "cliente06@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-06"
+    }
+  },
+  {
+    "_id": "VEN-007",
+    "dataVenda": "2026-03-07",
+    "valorTotal": 47.25,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-007",
+      "nomeCliente": "Cliente Exemplo 07",
+      "cpfCliente": "10000000007",
+      "enderecoCliente": "Rua das Flores, 107 - Centro",
+      "telefoneCliente": "11990000007",
+      "emailCliente": "cliente07@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-07"
+    }
+  },
+  {
+    "_id": "VEN-008",
+    "dataVenda": "2026-03-08",
+    "valorTotal": 68.0,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-008",
+      "nomeCliente": "Cliente Exemplo 08",
+      "cpfCliente": "10000000008",
+      "enderecoCliente": "Rua das Flores, 108 - Centro",
+      "telefoneCliente": "11990000008",
+      "emailCliente": "cliente08@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-08"
+    }
+  },
+  {
+    "_id": "VEN-009",
+    "dataVenda": "2026-03-09",
+    "valorTotal": 91.25,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-009",
+      "nomeCliente": "Cliente Exemplo 09",
+      "cpfCliente": "10000000009",
+      "enderecoCliente": "Rua das Flores, 109 - Centro",
+      "telefoneCliente": "11990000009",
+      "emailCliente": "cliente09@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-09"
+    }
+  },
+  {
+    "_id": "VEN-010",
+    "dataVenda": "2026-03-10",
+    "valorTotal": 19.5,
+    "status": "Concluida",
+    "cliente": {
+      "_id": "CLI-010",
+      "nomeCliente": "Cliente Exemplo 10",
+      "cpfCliente": "10000000010",
+      "enderecoCliente": "Rua das Flores, 110 - Centro",
+      "telefoneCliente": "11990000010",
+      "emailCliente": "cliente10@exemplo.com",
+      "statusCliente": "Ativo",
+      "dataCadastro": "2026-01-10"
+    }
+  }
+]

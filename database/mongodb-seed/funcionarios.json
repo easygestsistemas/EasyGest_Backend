@@ -1,0 +1,112 @@
+[
+  {
+    "_id": "FUN-001",
+    "nomeFuncionario": "Funcionario Exemplo 01",
+    "cpfFuncionario": "20000000001",
+    "ctpsFuncionario": "3000000001",
+    "cargoFuncionario": "Caixa",
+    "salarioFuncionario": 1925.5,
+    "dataAdmissaoFuncionario": "2025-02-02",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-002",
+    "nomeFuncionario": "Funcionario Exemplo 02",
+    "cpfFuncionario": "20000000002",
+    "ctpsFuncionario": "3000000002",
+    "cargoFuncionario": "Estoquista",
+    "salarioFuncionario": 2051.0,
+    "dataAdmissaoFuncionario": "2025-03-03",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-003",
+    "nomeFuncionario": "Funcionario Exemplo 03",
+    "cpfFuncionario": "20000000003",
+    "ctpsFuncionario": "3000000003",
+    "cargoFuncionario": "Atendente",
+    "salarioFuncionario": 2176.5,
+    "dataAdmissaoFuncionario": "2025-04-04",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-004",
+    "nomeFuncionario": "Funcionario Exemplo 04",
+    "cpfFuncionario": "20000000004",
+    "ctpsFuncionario": "3000000004",
+    "cargoFuncionario": "Caixa",
+    "salarioFuncionario": 2302.0,
+    "dataAdmissaoFuncionario": "2025-05-05",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-005",
+    "nomeFuncionario": "Funcionario Exemplo 05",
+    "cpfFuncionario": "20000000005",
+    "ctpsFuncionario": "3000000005",
+    "cargoFuncionario": "Estoquista",
+    "salarioFuncionario": 2427.5,
+    "dataAdmissaoFuncionario": "2025-06-06",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-006",
+    "nomeFuncionario": "Funcionario Exemplo 06",
+    "cpfFuncionario": "20000000006",
+    "ctpsFuncionario": "3000000006",
+    "cargoFuncionario": "Atendente",
+    "salarioFuncionario": 2553.0,
+    "dataAdmissaoFuncionario": "2025-07-07",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-007",
+    "nomeFuncionario": "Funcionario Exemplo 07",
+    "cpfFuncionario": "20000000007",
+    "ctpsFuncionario": "3000000007",
+    "cargoFuncionario": "Caixa",
+    "salarioFuncionario": 2678.5,
+    "dataAdmissaoFuncionario": "2025-08-08",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-008",
+    "nomeFuncionario": "Funcionario Exemplo 08",
+    "cpfFuncionario": "20000000008",
+    "ctpsFuncionario": "3000000008",
+    "cargoFuncionario": "Estoquista",
+    "salarioFuncionario": 2804.0,
+    "dataAdmissaoFuncionario": "2025-09-09",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-009",
+    "nomeFuncionario": "Funcionario Exemplo 09",
+    "cpfFuncionario": "20000000009",
+    "ctpsFuncionario": "3000000009",
+    "cargoFuncionario": "Atendente",
+    "salarioFuncionario": 2929.5,
+    "dataAdmissaoFuncionario": "2025-10-10",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  },
+  {
+    "_id": "FUN-010",
+    "nomeFuncionario": "Funcionario Exemplo 10",
+    "cpfFuncionario": "20000000010",
+    "ctpsFuncionario": "3000000010",
+    "cargoFuncionario": "Caixa",
+    "salarioFuncionario": 3055.0,
+    "dataAdmissaoFuncionario": "2025-11-11",
+    "dataDemissaoFuncionario": null,
+    "usuario": null
+  }
+]

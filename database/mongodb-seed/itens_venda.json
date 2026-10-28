@@ -1,0 +1,472 @@
+[
+  {
+    "_id": "ITE-001",
+    "venda": {
+      "_id": "VEN-001",
+      "dataVenda": "2026-03-01",
+      "valorTotal": 16.5,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-001",
+        "nomeCliente": "Cliente Exemplo 01",
+        "cpfCliente": "10000000001",
+        "enderecoCliente": "Rua das Flores, 101 - Centro",
+        "telefoneCliente": "11990000001",
+        "emailCliente": "cliente01@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-01"
+      }
+    },
+    "produto": {
+      "_id": "PRO-001",
+      "nomeProduto": "Produto Exemplo 01",
+      "tipoProduto": "Mercearia",
+      "pesoProduto": 0.6,
+      "custoProduto": 4.75,
+      "precoProduto": 8.25,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-01",
+      "dataValidadeProduto": "2027-02-01",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-01",
+      "quantidadeAtual": 29,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-001",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 01 LTDA",
+        "nomeFornecedor": "Fornecedor 01",
+        "cnpjFornecedor": "10000000000001",
+        "enderecoFornecedor": "Av. Central, 201 - Centro",
+        "telefoneFornecedor": "11980000001",
+        "emailFornecedor": "fornecedor01@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-01"
+      }
+    },
+    "quantidade": 2,
+    "valorUnitario": 8.25,
+    "subtotal": 16.5
+  },
+  {
+    "_id": "ITE-002",
+    "venda": {
+      "_id": "VEN-002",
+      "dataVenda": "2026-03-02",
+      "valorTotal": 28.5,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-002",
+        "nomeCliente": "Cliente Exemplo 02",
+        "cpfCliente": "10000000002",
+        "enderecoCliente": "Rua das Flores, 102 - Centro",
+        "telefoneCliente": "11990000002",
+        "emailCliente": "cliente02@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-02"
+      }
+    },
+    "produto": {
+      "_id": "PRO-002",
+      "nomeProduto": "Produto Exemplo 02",
+      "tipoProduto": "Hortifruti",
+      "pesoProduto": 0.7,
+      "custoProduto": 5.5,
+      "precoProduto": 9.5,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-02",
+      "dataValidadeProduto": "2027-02-02",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-02",
+      "quantidadeAtual": 29,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-002",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 02 LTDA",
+        "nomeFornecedor": "Fornecedor 02",
+        "cnpjFornecedor": "10000000000002",
+        "enderecoFornecedor": "Av. Central, 202 - Centro",
+        "telefoneFornecedor": "11980000002",
+        "emailFornecedor": "fornecedor02@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-02"
+      }
+    },
+    "quantidade": 3,
+    "valorUnitario": 9.5,
+    "subtotal": 28.5
+  },
+  {
+    "_id": "ITE-003",
+    "venda": {
+      "_id": "VEN-003",
+      "dataVenda": "2026-03-03",
+      "valorTotal": 43.0,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-003",
+        "nomeCliente": "Cliente Exemplo 03",
+        "cpfCliente": "10000000003",
+        "enderecoCliente": "Rua das Flores, 103 - Centro",
+        "telefoneCliente": "11990000003",
+        "emailCliente": "cliente03@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-03"
+      }
+    },
+    "produto": {
+      "_id": "PRO-003",
+      "nomeProduto": "Produto Exemplo 03",
+      "tipoProduto": "Mercearia",
+      "pesoProduto": 0.8,
+      "custoProduto": 6.25,
+      "precoProduto": 10.75,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-03",
+      "dataValidadeProduto": "2027-02-03",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-03",
+      "quantidadeAtual": 29,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-003",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 03 LTDA",
+        "nomeFornecedor": "Fornecedor 03",
+        "cnpjFornecedor": "10000000000003",
+        "enderecoFornecedor": "Av. Central, 203 - Centro",
+        "telefoneFornecedor": "11980000003",
+        "emailFornecedor": "fornecedor03@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-03"
+      }
+    },
+    "quantidade": 4,
+    "valorUnitario": 10.75,
+    "subtotal": 43.0
+  },
+  {
+    "_id": "ITE-004",
+    "venda": {
+      "_id": "VEN-004",
+      "dataVenda": "2026-03-04",
+      "valorTotal": 60.0,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-004",
+        "nomeCliente": "Cliente Exemplo 04",
+        "cpfCliente": "10000000004",
+        "enderecoCliente": "Rua das Flores, 104 - Centro",
+        "telefoneCliente": "11990000004",
+        "emailCliente": "cliente04@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-04"
+      }
+    },
+    "produto": {
+      "_id": "PRO-004",
+      "nomeProduto": "Produto Exemplo 04",
+      "tipoProduto": "Hortifruti",
+      "pesoProduto": 0.9,
+      "custoProduto": 7.0,
+      "precoProduto": 12.0,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-04",
+      "dataValidadeProduto": "2027-02-04",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-04",
+      "quantidadeAtual": 29,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-004",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 04 LTDA",
+        "nomeFornecedor": "Fornecedor 04",
+        "cnpjFornecedor": "10000000000004",
+        "enderecoFornecedor": "Av. Central, 204 - Centro",
+        "telefoneFornecedor": "11980000004",
+        "emailFornecedor": "fornecedor04@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-04"
+      }
+    },
+    "quantidade": 5,
+    "valorUnitario": 12.0,
+    "subtotal": 60.0
+  },
+  {
+    "_id": "ITE-005",
+    "venda": {
+      "_id": "VEN-005",
+      "dataVenda": "2026-03-05",
+      "valorTotal": 13.25,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-005",
+        "nomeCliente": "Cliente Exemplo 05",
+        "cpfCliente": "10000000005",
+        "enderecoCliente": "Rua das Flores, 105 - Centro",
+        "telefoneCliente": "11990000005",
+        "emailCliente": "cliente05@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-05"
+      }
+    },
+    "produto": {
+      "_id": "PRO-005",
+      "nomeProduto": "Produto Exemplo 05",
+      "tipoProduto": "Mercearia",
+      "pesoProduto": 1.0,
+      "custoProduto": 7.75,
+      "precoProduto": 13.25,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-05",
+      "dataValidadeProduto": "2027-02-05",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-05",
+      "quantidadeAtual": 34,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-005",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 05 LTDA",
+        "nomeFornecedor": "Fornecedor 05",
+        "cnpjFornecedor": "10000000000005",
+        "enderecoFornecedor": "Av. Central, 205 - Centro",
+        "telefoneFornecedor": "11980000005",
+        "emailFornecedor": "fornecedor05@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-05"
+      }
+    },
+    "quantidade": 1,
+    "valorUnitario": 13.25,
+    "subtotal": 13.25
+  },
+  {
+    "_id": "ITE-006",
+    "venda": {
+      "_id": "VEN-006",
+      "dataVenda": "2026-03-06",
+      "valorTotal": 29.0,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-006",
+        "nomeCliente": "Cliente Exemplo 06",
+        "cpfCliente": "10000000006",
+        "enderecoCliente": "Rua das Flores, 106 - Centro",
+        "telefoneCliente": "11990000006",
+        "emailCliente": "cliente06@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-06"
+      }
+    },
+    "produto": {
+      "_id": "PRO-006",
+      "nomeProduto": "Produto Exemplo 06",
+      "tipoProduto": "Hortifruti",
+      "pesoProduto": 1.1,
+      "custoProduto": 8.5,
+      "precoProduto": 14.5,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-06",
+      "dataValidadeProduto": "2027-02-06",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-06",
+      "quantidadeAtual": 34,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-006",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 06 LTDA",
+        "nomeFornecedor": "Fornecedor 06",
+        "cnpjFornecedor": "10000000000006",
+        "enderecoFornecedor": "Av. Central, 206 - Centro",
+        "telefoneFornecedor": "11980000006",
+        "emailFornecedor": "fornecedor06@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-06"
+      }
+    },
+    "quantidade": 2,
+    "valorUnitario": 14.5,
+    "subtotal": 29.0
+  },
+  {
+    "_id": "ITE-007",
+    "venda": {
+      "_id": "VEN-007",
+      "dataVenda": "2026-03-07",
+      "valorTotal": 47.25,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-007",
+        "nomeCliente": "Cliente Exemplo 07",
+        "cpfCliente": "10000000007",
+        "enderecoCliente": "Rua das Flores, 107 - Centro",
+        "telefoneCliente": "11990000007",
+        "emailCliente": "cliente07@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-07"
+      }
+    },
+    "produto": {
+      "_id": "PRO-007",
+      "nomeProduto": "Produto Exemplo 07",
+      "tipoProduto": "Mercearia",
+      "pesoProduto": 1.2,
+      "custoProduto": 9.25,
+      "precoProduto": 15.75,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-07",
+      "dataValidadeProduto": "2027-02-07",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-07",
+      "quantidadeAtual": 34,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-007",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 07 LTDA",
+        "nomeFornecedor": "Fornecedor 07",
+        "cnpjFornecedor": "10000000000007",
+        "enderecoFornecedor": "Av. Central, 207 - Centro",
+        "telefoneFornecedor": "11980000007",
+        "emailFornecedor": "fornecedor07@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-07"
+      }
+    },
+    "quantidade": 3,
+    "valorUnitario": 15.75,
+    "subtotal": 47.25
+  },
+  {
+    "_id": "ITE-008",
+    "venda": {
+      "_id": "VEN-008",
+      "dataVenda": "2026-03-08",
+      "valorTotal": 68.0,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-008",
+        "nomeCliente": "Cliente Exemplo 08",
+        "cpfCliente": "10000000008",
+        "enderecoCliente": "Rua das Flores, 108 - Centro",
+        "telefoneCliente": "11990000008",
+        "emailCliente": "cliente08@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-08"
+      }
+    },
+    "produto": {
+      "_id": "PRO-008",
+      "nomeProduto": "Produto Exemplo 08",
+      "tipoProduto": "Hortifruti",
+      "pesoProduto": 1.3,
+      "custoProduto": 10.0,
+      "precoProduto": 17.0,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-08",
+      "dataValidadeProduto": "2027-02-08",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-08",
+      "quantidadeAtual": 34,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-008",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 08 LTDA",
+        "nomeFornecedor": "Fornecedor 08",
+        "cnpjFornecedor": "10000000000008",
+        "enderecoFornecedor": "Av. Central, 208 - Centro",
+        "telefoneFornecedor": "11980000008",
+        "emailFornecedor": "fornecedor08@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-08"
+      }
+    },
+    "quantidade": 4,
+    "valorUnitario": 17.0,
+    "subtotal": 68.0
+  },
+  {
+    "_id": "ITE-009",
+    "venda": {
+      "_id": "VEN-009",
+      "dataVenda": "2026-03-09",
+      "valorTotal": 91.25,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-009",
+        "nomeCliente": "Cliente Exemplo 09",
+        "cpfCliente": "10000000009",
+        "enderecoCliente": "Rua das Flores, 109 - Centro",
+        "telefoneCliente": "11990000009",
+        "emailCliente": "cliente09@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-09"
+      }
+    },
+    "produto": {
+      "_id": "PRO-009",
+      "nomeProduto": "Produto Exemplo 09",
+      "tipoProduto": "Mercearia",
+      "pesoProduto": 1.4,
+      "custoProduto": 10.75,
+      "precoProduto": 18.25,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-09",
+      "dataValidadeProduto": "2027-02-09",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-09",
+      "quantidadeAtual": 34,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-009",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 09 LTDA",
+        "nomeFornecedor": "Fornecedor 09",
+        "cnpjFornecedor": "10000000000009",
+        "enderecoFornecedor": "Av. Central, 209 - Centro",
+        "telefoneFornecedor": "11980000009",
+        "emailFornecedor": "fornecedor09@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-09"
+      }
+    },
+    "quantidade": 5,
+    "valorUnitario": 18.25,
+    "subtotal": 91.25
+  },
+  {
+    "_id": "ITE-010",
+    "venda": {
+      "_id": "VEN-010",
+      "dataVenda": "2026-03-10",
+      "valorTotal": 19.5,
+      "status": "Concluida",
+      "cliente": {
+        "_id": "CLI-010",
+        "nomeCliente": "Cliente Exemplo 10",
+        "cpfCliente": "10000000010",
+        "enderecoCliente": "Rua das Flores, 110 - Centro",
+        "telefoneCliente": "11990000010",
+        "emailCliente": "cliente10@exemplo.com",
+        "statusCliente": "Ativo",
+        "dataCadastro": "2026-01-10"
+      }
+    },
+    "produto": {
+      "_id": "PRO-010",
+      "nomeProduto": "Produto Exemplo 10",
+      "tipoProduto": "Hortifruti",
+      "pesoProduto": 1.5,
+      "custoProduto": 11.5,
+      "precoProduto": 19.5,
+      "statusProduto": "Ativo",
+      "dataCompraProduto": "2026-02-10",
+      "dataValidadeProduto": "2027-02-10",
+      "dataVendaProduto": null,
+      "dataFabricacaoProduto": "2026-01-10",
+      "quantidadeAtual": 39,
+      "estoqueMinimo": 5,
+      "fornecedor": {
+        "_id": "FOR-010",
+        "razaoSocialFornecedor": "Fornecedor Exemplo 10 LTDA",
+        "nomeFornecedor": "Fornecedor 10",
+        "cnpjFornecedor": "10000000000010",
+        "enderecoFornecedor": "Av. Central, 210 - Centro",
+        "telefoneFornecedor": "11980000010",
+        "emailFornecedor": "fornecedor10@exemplo.com",
+        "dataCadastroFornecedor": "2026-01-10"
+      }
+    },
+    "quantidade": 1,
+    "valorUnitario": 19.5,
+    "subtotal": 19.5
+  }
+]

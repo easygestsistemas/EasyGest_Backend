@@ -21,9 +21,21 @@ public class VendaController {
         return service.listar();
     }
 
+    @GetMapping("/{codVenda}")
+    public Venda buscarPorId(@PathVariable String codVenda) {
+        return service.buscarPorId(codVenda);
+    }
+
     @PostMapping
     public Venda salvar(@RequestBody Venda venda) {
         return service.salvar(venda);
+    }
+
+    @PutMapping("/{codVenda}")
+    public Venda atualizar(
+            @PathVariable String codVenda,
+            @RequestBody Venda venda) {
+        return service.atualizar(codVenda, venda);
     }
 
     @DeleteMapping("/{id}")
