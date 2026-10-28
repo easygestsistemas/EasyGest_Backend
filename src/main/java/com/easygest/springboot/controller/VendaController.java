@@ -2,6 +2,8 @@ package com.easygest.springboot.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,14 +29,14 @@ public class VendaController {
     }
 
     @PostMapping
-    public Venda salvar(@RequestBody Venda venda) {
+    public Venda salvar(@Valid @RequestBody Venda venda) {
         return service.salvar(venda);
     }
 
     @PutMapping("/{codVenda}")
     public Venda atualizar(
             @PathVariable String codVenda,
-            @RequestBody Venda venda) {
+            @Valid @RequestBody Venda venda) {
         return service.atualizar(codVenda, venda);
     }
 

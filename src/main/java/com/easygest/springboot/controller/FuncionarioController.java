@@ -2,6 +2,8 @@ package com.easygest.springboot.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,7 @@ public class FuncionarioController {
 
     @PostMapping
     public Funcionario salvar(
-            @RequestBody Funcionario funcionario) {
+            @Valid @RequestBody Funcionario funcionario) {
 
         return service.salvar(funcionario);
     }
@@ -38,7 +40,7 @@ public class FuncionarioController {
     @PutMapping("/{codFuncionario}")
     public Funcionario atualizar(
             @PathVariable String codFuncionario,
-            @RequestBody Funcionario funcionario) {
+            @Valid @RequestBody Funcionario funcionario) {
 
         return service.atualizar(
                 codFuncionario,

@@ -2,6 +2,8 @@ package com.easygest.springboot.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,14 +29,14 @@ public class ClienteController {
     }
 
     @PostMapping
-    public Cliente salvar(@RequestBody Cliente cliente) {
+    public Cliente salvar(@Valid @RequestBody Cliente cliente) {
         return service.salvar(cliente);
     }
 
     @PutMapping("/{codCliente}")
     public Cliente atualizar(
             @PathVariable String codCliente,
-            @RequestBody Cliente cliente) {
+            @Valid @RequestBody Cliente cliente) {
 
         return service.atualizar(codCliente, cliente);
     }

@@ -2,6 +2,8 @@ package com.easygest.springboot.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,7 @@ public class ProdutoController {
 
     @PostMapping
     public Produto criar(
-            @RequestBody Produto produto) {
+            @Valid @RequestBody Produto produto) {
 
         return produtoService.salvar(produto);
     }
@@ -38,7 +40,7 @@ public class ProdutoController {
     @PutMapping("/{codProduto}")
     public Produto atualizar(
             @PathVariable String codProduto,
-            @RequestBody Produto produto) {
+            @Valid @RequestBody Produto produto) {
 
         return produtoService.atualizar(
                 codProduto,

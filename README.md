@@ -287,6 +287,8 @@ timeline
 * **Framework Principal:** Spring Boot 4.0.x / 3.x
   * *Spring Web MVC*: Construção de controladores RESTful e serialização JSON.
   * *Spring Data MongoDB*: Abstração de repositórios orientados a documentos e geração de queries dinâmicas.
+  * *Spring Security*: Autenticação HTTP Basic para os endpoints REST.
+  * *Jakarta Bean Validation*: Validação dos dados de entrada dos endpoints.
   * *Spring Boot DevTools*: Otimização do ciclo de compilação em ambiente de desenvolvimento.
 * **Ferramenta de Suporte e Produtividade:** Project Lombok (eliminação de boilerplate: `@Getter`, `@Setter`, construtores).
 * **Banco de Dados:** MongoDB Atlas (NoSQL orientado a documentos na nuvem).
@@ -312,11 +314,41 @@ cd API_Easygest
 # Compilação e execução via Maven Wrapper (Windows PowerShell)
 .\mvnw.cmd spring-boot:run
 
+# Linux/macOS (o wrapper do projeto não precisa estar marcado como executável)
+bash ./mvnw spring-boot:run
+
 # Ou via Maven instalado no sistema operacional
 mvn spring-boot:run
 ```
 
 A aplicação inicializará por padrão na porta `8080`. Os endpoints estarão acessíveis a partir do prefixo base `http://localhost:8080/`.
+
+### 7.3. Segurança e validação da API
+
+A API usa **HTTP Basic**, sem JWT. Todos os endpoints exigem autenticação; somente requisições CORS `OPTIONS` são liberadas para preflight. A API é stateless e CSRF está desabilitado para este uso REST. Configure as credenciais localmente no arquivo `.env.local` (não versionado):
+
+```properties
+SPRING_MONGODB_URI=<sua-uri-do-mongodb>
+EASYGEST_SECURITY_USERNAME=<seu-usuario>
+EASYGEST_SECURITY_PASSWORD=<uma-senha-forte>
+```
+
+Não reutilize credenciais de exemplo nem envie o arquivo `.env.local` ao repositório. Em produção, use HTTPS e forneça os valores por um gerenciador de segredos.
+
+No Postman, selecione **Authorization → Basic Auth**, informe o usuário e a senha configurados e envie as requisições para `http://localhost:8080`. Por exemplo, para cadastrar produto:
+
+```http
+POST http://localhost:8080/produtos
+Content-Type: application/json
+```
+
+Os endpoints de criação e atualização usam Jakarta Bean Validation (`@Valid`). Os campos obrigatórios e valores negativos inválidos retornam HTTP `400`; uma requisição sem credenciais válidas retorna HTTP `401`.
+
+**Recursos utilizados:** `spring-boot-starter-security` e `spring-boot-starter-validation`, gerenciados pelo Spring Boot e resolvidos via Maven Central; configuração de segurança em `SecurityConfig`; restrições declarativas nos modelos recebidos e ativação nos controllers.
+
+**Escopo implementado:** autenticação compartilhada em memória, configurada por ambiente (não é um login por usuário MongoDB); validações de campos obrigatórios, e-mail, quantidades e valores não negativos nos módulos de Cliente, Fornecedor, Funcionário, Prestador, Produto, Usuário, Venda e ItemVenda.
+
+**Módulos que ainda precisam de validação/testes:** Compra ainda não possui controller/endpoint; testar todas as rotas CRUD com MongoDB e credenciais; definir regras fiscais de CPF/CNPJ/telefone e consistência de datas; validar permissões por perfil (atualmente qualquer usuário Basic Auth autenticado recebe o mesmo papel); e cobrir regras transacionais de estoque e vendas com testes de integração.
 
 ---
 
@@ -643,4 +675,3 @@ A aplicação inicializará por padrão na porta `8080`. Os endpoints estarão a
 
 ## 8. Considerações Acadêmicas e Autoria
 Projeto desenvolvido por **Leonardo da Silva Nóbrega** no âmbito acadêmico do curso de **Desenvolvimento de Software Multiplataforma (DSM)**. Destina-se ao estudo, validação e aplicação prática de conceitos avançados de engenharia de software para a web, arquiteturas de microsserviços e persistência heterogênea.
-

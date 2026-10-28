@@ -2,6 +2,8 @@ package com.easygest.springboot.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +38,7 @@ public class ItemVendaController {
 
     @PostMapping
     public ItemVenda salvar(
-            @RequestBody ItemVenda itemVenda) {
+            @Valid @RequestBody ItemVenda itemVenda) {
 
         return service.salvar(itemVenda);
     }
@@ -44,7 +46,7 @@ public class ItemVendaController {
     @PutMapping("/{codItemVenda}")
     public ItemVenda atualizar(
             @PathVariable String codItemVenda,
-            @RequestBody ItemVenda itemVenda) {
+            @Valid @RequestBody ItemVenda itemVenda) {
         return service.atualizar(codItemVenda, itemVenda);
     }
 
