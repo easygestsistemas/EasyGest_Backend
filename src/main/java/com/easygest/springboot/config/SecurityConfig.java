@@ -41,8 +41,8 @@ public class SecurityConfig {
 
     @Bean
     UserDetailsService userDetailsService(
-            @Value("${EASYGEST_SECURITY_USERNAME}") String username,
-            @Value("${EASYGEST_SECURITY_PASSWORD}") String password,
+            @Value("${EASYGEST_SECURITY_USERNAME:easygest}") String username,
+            @Value("${EASYGEST_SECURITY_PASSWORD:easygest-local-change-me}") String password,
             PasswordEncoder passwordEncoder) {
         return new InMemoryUserDetailsManager(
                 User.withUsername(username)
@@ -60,13 +60,21 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource(
             @Value("${EASYGEST_CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,http://localhost:4200}") String allowedOrigins) {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.stream(allowedOrigins.split(","))
+        List<String> origins = Arrays.stream(allowedOrigins.split(","))
                 .map(String::trim)
                 .filter(origin -> !origin.isEmpty())
-                .toList());
+                .toList();
+
+        if (origins.contains("*")) {
+            configuration.setAllowedOriginPatterns(List.of("*"));
+            configuration.setAllowCredentials(false);
+        } else {
+            configuration.setAllowedOrigins(origins);
+            configuration.setAllowCredentials(true);
+        }
+
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

@@ -335,6 +335,19 @@ EASYGEST_SECURITY_PASSWORD=<uma-senha-forte>
 
 Não reutilize credenciais de exemplo nem envie o arquivo `.env.local` ao repositório. Em produção, use HTTPS e forneça os valores por um gerenciador de segredos.
 
+#### Deploy no Render
+
+O projeto inclui um `render.yaml`. No serviço ou Blueprint do Render, configure obrigatoriamente estas variáveis de ambiente:
+
+```properties
+SPRING_MONGODB_URI=<uri-mongodb-com-banco>
+EASYGEST_SECURITY_USERNAME=<usuario-da-api>
+EASYGEST_SECURITY_PASSWORD=<senha-forte-da-api>
+EASYGEST_CORS_ALLOWED_ORIGINS=<origem-frontend>,<outra-origem-opcional>
+```
+
+O Dockerfile usa Java 21 e o Spring Boot recebe automaticamente a porta fornecida pelo Render por meio da variável `PORT`. Não defina uma porta fixa em produção. Para liberar apenas um frontend, informe a URL completa sem barra final, por exemplo `https://easygest.vercel.app`.
+
 No Postman, selecione **Authorization → Basic Auth**, informe o usuário e a senha configurados e envie as requisições para `http://localhost:8080`. Por exemplo, para cadastrar produto:
 
 ```http
