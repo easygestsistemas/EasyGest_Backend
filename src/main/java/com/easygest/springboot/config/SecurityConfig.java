@@ -61,20 +61,28 @@ public class SecurityConfig {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource(
-            @Value("${EASYGEST_CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,http://localhost:4200}") String allowedOrigins) {
+            @Value("${EASYGEST_CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,http://localhost:4200,https://*.vercel.app}") String allowedOrigins) {
         CorsConfiguration configuration = new CorsConfiguration();
         List<String> origins = Arrays.stream(allowedOrigins.split(","))
                 .map(String::trim)
                 .filter(origin -> !origin.isEmpty())
                 .toList();
 
+        List<String> exactOrigins = origins.stream()
+                .filter(origin -> !origin.contains("*"))
+                .toList();
+        List<String> originPatterns = origins.stream()
+                .filter(origin -> origin.contains("*"))
+                .toList();
+
         if (origins.contains("*")) {
-            configuration.setAllowedOriginPatterns(List.of("*"));
-            configuration.setAllowCredentials(false);
-        } else {
-            configuration.setAllowedOrigins(origins);
-            configuration.setAllowCredentials(true);
+            originPatterns = List.of("*");
+            exactOrigins = List.of();
         }
+
+        configuration.setAllowedOrigins(exactOrigins);
+        configuration.setAllowedOriginPatterns(originPatterns);
+        configuration.setAllowCredentials(false);
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
