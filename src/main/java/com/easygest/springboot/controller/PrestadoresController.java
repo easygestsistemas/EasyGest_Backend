@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.easygest.springboot.model.Prestadores;
 import com.easygest.springboot.service.PrestadoresService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/prestadores")
 public class PrestadoresController {

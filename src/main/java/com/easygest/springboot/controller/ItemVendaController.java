@@ -20,7 +20,6 @@ import com.easygest.springboot.service.ItemVendaService;
 
 @RestController
 @RequestMapping("/itens-venda")
-@CrossOrigin(origins = "*")
 public class ItemVendaController {
 
     @Autowired

@@ -4,7 +4,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.easygest.springboot.model.Usuario;
 
-public interface UsuarioRepository extends MongoRepository<Usuario, String>{
-
-
+public interface UsuarioRepository extends MongoRepository<Usuario, String> {
 }

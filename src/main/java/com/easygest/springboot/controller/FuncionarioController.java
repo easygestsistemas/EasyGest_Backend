@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.easygest.springboot.model.Funcionario;
 import com.easygest.springboot.service.FuncionarioService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/funcionarios")
 public class FuncionarioController {

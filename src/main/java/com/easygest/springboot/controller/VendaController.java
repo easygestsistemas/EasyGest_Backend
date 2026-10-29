@@ -12,7 +12,6 @@ import com.easygest.springboot.service.VendaService;
 
 @RestController
 @RequestMapping("/vendas")
-@CrossOrigin(origins = "*")
 public class VendaController {
 
     @Autowired

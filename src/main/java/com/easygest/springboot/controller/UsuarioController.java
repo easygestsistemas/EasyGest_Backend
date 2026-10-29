@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.easygest.springboot.model.Usuario;
 import com.easygest.springboot.service.UsuarioService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {

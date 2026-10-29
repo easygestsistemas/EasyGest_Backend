@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.easygest.springboot.model.Produto;
 import com.easygest.springboot.service.ProdutoService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {

@@ -3,8 +3,11 @@ services:
     name: easygest-backend
     runtime: docker
     plan: free
+    healthCheckPath: /health
     envVars:
       - key: SPRING_MONGODB_URI
+        sync: false
+      - key: SPRING_PROFILES_ACTIVE
         sync: false
       - key: EASYGEST_SECURITY_USERNAME
         sync: false

@@ -12,12 +12,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(properties = {
         "EASYGEST_SECURITY_USERNAME=test-user",
         "EASYGEST_SECURITY_PASSWORD=test-password",
+        "EASYGEST_CORS_ALLOWED_ORIGINS=https://easygest.vercel.app,http://localhost:5173",
         "SPRING_MONGODB_URI=mongodb://localhost:27017/EasyGest"
 })
 @AutoConfigureMockMvc
@@ -29,6 +32,30 @@ class SecurityAndValidationTests {
     @Test
     void protectedEndpointsRequireAuthentication() throws Exception {
         mockMvc.perform(get("/produtos"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void healthCheckAndCorsPreflightArePublic() throws Exception {
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(options("/produtos")
+                        .header(HttpHeaders.ORIGIN, "https://easygest.vercel.app")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, "POST")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS, "authorization,content-type"))
+                .andExpect(status().isOk())
+                .andExpect(header().string(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,
+                        "https://easygest.vercel.app"));
+    }
+
+    @Test
+    void invalidCredentialsAreRejected() throws Exception {
+        String invalidCredentials = Base64.getEncoder()
+                .encodeToString("test-user:wrong-password".getBytes(StandardCharsets.UTF_8));
+
+        mockMvc.perform(get("/produtos")
+                        .header(HttpHeaders.AUTHORIZATION, "Basic " + invalidCredentials))
                 .andExpect(status().isUnauthorized());
     }
 

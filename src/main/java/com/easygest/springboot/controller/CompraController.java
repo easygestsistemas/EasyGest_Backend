@@ -18,7 +18,6 @@ import com.easygest.springboot.service.CompraService;
 
 @RestController
 @RequestMapping("/compras")
-@CrossOrigin(origins = "*")
 public class CompraController {
 
     @Autowired

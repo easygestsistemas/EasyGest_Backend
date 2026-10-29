@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.easygest.springboot.model.Fornecedor;
 import com.easygest.springboot.service.FornecedorService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/fornecedores")
 public class FornecedorController {
