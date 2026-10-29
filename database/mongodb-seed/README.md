@@ -21,15 +21,11 @@ mongoimport --uri "$env:SPRING_MONGODB_URI" --db EasyGest --collection clientes 
 mongoimport --uri "$env:SPRING_MONGODB_URI" --db EasyGest --collection funcionarios --jsonArray --file database/mongodb-seed/funcionarios.json
 mongoimport --uri "$env:SPRING_MONGODB_URI" --db EasyGest --collection prestadores --jsonArray --file database/mongodb-seed/prestadores.json
 mongoimport --uri "$env:SPRING_MONGODB_URI" --db EasyGest --collection produtos --jsonArray --file database/mongodb-seed/produtos.json
-mongoimport --uri "$env:SPRING_MONGODB_URI" --db EasyGest --collection compras --jsonArray --file database/mongodb-seed/compras.json
-mongoimport --uri "$env:SPRING_MONGODB_URI" --db EasyGest --collection vendas --jsonArray --file database/mongodb-seed/vendas.json
-mongoimport --uri "$env:SPRING_MONGODB_URI" --db EasyGest --collection itens_venda --jsonArray --file database/mongodb-seed/itens_venda.json
 ```
 
 Os IDs são strings e os documentos usam `_id`, como espera o mapeamento
-MongoDB dos modelos. As compras, vendas e itens de venda contêm cópias
-embutidas dos fornecedores, clientes, produtos e vendas correspondentes.
-O estoque e o total da venda já refletem os itens de exemplo.
+MongoDB dos modelos. Registros financeiros reais devem ser cadastrados pela
+API ou inseridos manualmente, sem utilizar dados de demonstração do repositório.
 
 O campo `usuario` dos funcionários fica `null`. Como os usuários serão
 cadastrados depois, não envie esses funcionários ao endpoint da API antes de
