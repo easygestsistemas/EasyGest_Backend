@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.easygest.springboot.dto.ClienteDTO;
 import com.easygest.springboot.model.Cliente;
 import com.easygest.springboot.service.ClienteService;
 
@@ -18,30 +19,43 @@ public class ClienteController {
     private ClienteService service;
 
     @GetMapping
-    public List<Cliente> listar() {
-        return service.listar();
+    public List<ClienteDTO> listar() {
+        return service.listar().stream()
+                .map(this::toDto)
+                .toList();
     }
 
     @GetMapping("/{codCliente}")
-    public Cliente buscarPorId(@PathVariable String codCliente) {
-        return service.buscarPorId(codCliente);
+    public ClienteDTO buscarPorId(@PathVariable String codCliente) {
+        return toDto(service.buscarPorId(codCliente));
     }
 
     @PostMapping
-    public Cliente salvar(@Valid @RequestBody Cliente cliente) {
-        return service.salvar(cliente);
+    public ClienteDTO salvar(@Valid @RequestBody Cliente cliente) {
+        return toDto(service.salvar(cliente));
     }
 
     @PutMapping("/{codCliente}")
-    public Cliente atualizar(
+    public ClienteDTO atualizar(
             @PathVariable String codCliente,
             @Valid @RequestBody Cliente cliente) {
-
-        return service.atualizar(codCliente, cliente);
+        return toDto(service.atualizar(codCliente, cliente));
     }
 
     @DeleteMapping("/{codCliente}")
     public void deletar(@PathVariable String codCliente) {
         service.deletar(codCliente);
+    }
+
+    private ClienteDTO toDto(Cliente c) {
+        return new ClienteDTO(
+                c.getCodCliente(),
+                c.getNomeCliente(),
+                c.getEnderecoCliente(),
+                c.getTelefoneCliente(),
+                c.getEmailCliente(),
+                c.getStatusCliente(),
+                c.getDataCadastro()
+        );
     }
 }

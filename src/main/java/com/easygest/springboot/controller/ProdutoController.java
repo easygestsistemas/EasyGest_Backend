@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.easygest.springboot.dto.ProdutoDTO;
 import com.easygest.springboot.model.Produto;
 import com.easygest.springboot.service.ProdutoService;
 
@@ -18,32 +19,44 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping
-    public List<Produto> listar() {
-        return produtoService.listarTodos();
+    public List<ProdutoDTO> listar() {
+        return produtoService.listarTodos().stream()
+                .map(this::toDto)
+                .toList();
     }
 
     @GetMapping("/{codProduto}")
-    public Produto buscarPorCodigo(
+    public ProdutoDTO buscarPorCodigo(
             @PathVariable String codProduto) {
-
-        return produtoService.buscarPorCod(codProduto);
+        return toDto(produtoService.buscarPorCod(codProduto));
     }
 
     @PostMapping
-    public Produto criar(
+    public ProdutoDTO criar(
             @Valid @RequestBody Produto produto) {
-
-        return produtoService.salvar(produto);
+        return toDto(produtoService.salvar(produto));
     }
 
     @PutMapping("/{codProduto}")
-    public Produto atualizar(
+    public ProdutoDTO atualizar(
             @PathVariable String codProduto,
             @Valid @RequestBody Produto produto) {
+        return toDto(produtoService.atualizar(codProduto, produto));
+    }
 
-        return produtoService.atualizar(
-                codProduto,
-                produto);
+    private ProdutoDTO toDto(Produto p) {
+        return new ProdutoDTO(
+                p.getCodProduto(),
+                p.getNomeProduto(),
+                p.getTipoProduto(),
+                p.getPesoProduto(),
+                p.getCustoProduto(),
+                p.getPrecoProduto(),
+                p.getStatusProduto(),
+                p.getDataValidadeProduto(),
+                p.getQuantidadeAtual(),
+                p.getEstoqueMinimo()
+        );
     }
 
     @DeleteMapping("/{codProduto}")

@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.easygest.springboot.dto.UsuarioDTO;
 import com.easygest.springboot.model.Usuario;
 import com.easygest.springboot.service.UsuarioService;
 
@@ -18,38 +19,42 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping
-    public List<Usuario> listar() {
-        return service.listar();
+    public List<UsuarioDTO> listar() {
+        return service.listar().stream()
+                .map(this::toDto)
+                .toList();
     }
 
     @GetMapping("/{codUsuario}")
-    public Usuario buscarPorId(
+    public UsuarioDTO buscarPorId(
             @PathVariable String codUsuario) {
-
-        return service.buscarPorId(codUsuario);
+        return toDto(service.buscarPorId(codUsuario));
     }
 
     @PostMapping
-    public Usuario salvar(
+    public UsuarioDTO salvar(
             @Valid @RequestBody Usuario usuario) {
-
-        return service.salvar(usuario);
+        return toDto(service.salvar(usuario));
     }
 
     @PutMapping("/{codUsuario}")
-    public Usuario atualizar(
+    public UsuarioDTO atualizar(
             @PathVariable String codUsuario,
             @Valid @RequestBody Usuario usuario) {
-
-        return service.atualizar(
-                codUsuario,
-                usuario);
+        return toDto(service.atualizar(codUsuario, usuario));
     }
 
     @DeleteMapping("/{codUsuario}")
     public void deletar(
             @PathVariable String codUsuario) {
-
         service.deletar(codUsuario);
+    }
+
+    private UsuarioDTO toDto(Usuario u) {
+        return new UsuarioDTO(
+                u.getCodUsuario(),
+                u.getNomeUsuario(),
+                u.getTipoUsuario()
+        );
     }
 }

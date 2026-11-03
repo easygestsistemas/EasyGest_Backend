@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.easygest.springboot.dto.FuncionarioDTO;
 import com.easygest.springboot.model.Funcionario;
 import com.easygest.springboot.service.FuncionarioService;
 
@@ -18,38 +19,44 @@ public class FuncionarioController {
     private FuncionarioService service;
 
     @GetMapping
-    public List<Funcionario> listar() {
-        return service.listar();
+    public List<FuncionarioDTO> listar() {
+        return service.listar().stream()
+                .map(this::toDto)
+                .toList();
     }
 
     @GetMapping("/{codFuncionario}")
-    public Funcionario buscarPorId(
+    public FuncionarioDTO buscarPorId(
             @PathVariable String codFuncionario) {
-
-        return service.buscarPorId(codFuncionario);
+        return toDto(service.buscarPorId(codFuncionario));
     }
 
     @PostMapping
-    public Funcionario salvar(
+    public FuncionarioDTO salvar(
             @Valid @RequestBody Funcionario funcionario) {
-
-        return service.salvar(funcionario);
+        return toDto(service.salvar(funcionario));
     }
 
     @PutMapping("/{codFuncionario}")
-    public Funcionario atualizar(
+    public FuncionarioDTO atualizar(
             @PathVariable String codFuncionario,
             @Valid @RequestBody Funcionario funcionario) {
-
-        return service.atualizar(
-                codFuncionario,
-                funcionario);
+        return toDto(service.atualizar(codFuncionario, funcionario));
     }
 
     @DeleteMapping("/{codFuncionario}")
     public void deletar(
             @PathVariable String codFuncionario) {
-
         service.deletar(codFuncionario);
+    }
+
+    private FuncionarioDTO toDto(Funcionario f) {
+        return new FuncionarioDTO(
+                f.getCodFuncionario(),
+                f.getNomeFuncionario(),
+                f.getCargoFuncionario(),
+                f.getDataAdmissaoFuncionario(),
+                f.getDataDemissaoFuncionario()
+        );
     }
 }

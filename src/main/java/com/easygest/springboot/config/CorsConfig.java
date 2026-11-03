@@ -13,7 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
     private final String[] allowedOrigins;
 
     public CorsConfig(
-            @Value("${EASYGEST_CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173,http://localhost:4200,https://*.vercel.app}") String origins) {
+            @Value("${EASYGEST_CORS_ALLOWED_ORIGINS:https://easygesterp.vercel.app,http://localhost:5173}") String origins) {
         this.allowedOrigins = Arrays.stream(origins.split(","))
                 .map(String::trim)
                 .filter(origin -> !origin.isEmpty())

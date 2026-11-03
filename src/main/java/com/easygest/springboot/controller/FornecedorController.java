@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.easygest.springboot.dto.FornecedorDTO;
 import com.easygest.springboot.model.Fornecedor;
 import com.easygest.springboot.service.FornecedorService;
 
@@ -18,38 +19,46 @@ public class FornecedorController {
     private FornecedorService service;
 
     @GetMapping
-    public List<Fornecedor> listar() {
-        return service.listar();
+    public List<FornecedorDTO> listar() {
+        return service.listar().stream()
+                .map(this::toDto)
+                .toList();
     }
 
     @GetMapping("/{codFornecedor}")
-    public Fornecedor buscarPorId(
+    public FornecedorDTO buscarPorId(
             @PathVariable String codFornecedor) {
-
-        return service.buscarPorId(codFornecedor);
+        return toDto(service.buscarPorId(codFornecedor));
     }
 
     @PostMapping
-    public Fornecedor salvar(
+    public FornecedorDTO salvar(
             @Valid @RequestBody Fornecedor fornecedor) {
-
-        return service.salvar(fornecedor);
+        return toDto(service.salvar(fornecedor));
     }
 
     @PutMapping("/{codFornecedor}")
-    public Fornecedor atualizar(
+    public FornecedorDTO atualizar(
             @PathVariable String codFornecedor,
             @Valid @RequestBody Fornecedor fornecedor) {
-
-        return service.atualizar(
-                codFornecedor,
-                fornecedor);
+        return toDto(service.atualizar(codFornecedor, fornecedor));
     }
 
     @DeleteMapping("/{codFornecedor}")
     public void deletar(
             @PathVariable String codFornecedor) {
-
         service.deletar(codFornecedor);
+    }
+
+    private FornecedorDTO toDto(Fornecedor f) {
+        return new FornecedorDTO(
+                f.getCodFornecedor(),
+                f.getRazaoSocialFornecedor(),
+                f.getNomeFornecedor(),
+                f.getEnderecoFornecedor(),
+                f.getTelefoneFornecedor(),
+                f.getEmailFornecedor(),
+                f.getDataCadastroFornecedor()
+        );
     }
 }
