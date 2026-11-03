@@ -366,7 +366,7 @@ Os endpoints de criação e atualização usam Jakarta Bean Validation (`@Valid`
 ---
 
 ## 8. Considerações Acadêmicas e Autoria
-Projeto desenvolvido por **Leonardo da Silva Nóbrega** no âmbito acadêmico do curso de **Desenvolvimento de Software Multiplataforma (DSM)**. Destina-se ao estudo, validação e aplicação prática de conceitos avançados de engenharia de software para a web, arquiteturas de microsserviços e persistência heterogênea.
+Projeto desenvolvido por **Leonardo Nóbrega** no âmbito acadêmico do curso de **Desenvolvimento de Software Multiplataforma (DSM)**. Destina-se ao estudo, validação e aplicação prática de conceitos avançados de engenharia de software para a web, arquiteturas de microsserviços e persistência heterogênea.
 
 ---
 
@@ -687,4 +687,4 @@ A aplicação inicializará por padrão na porta `8080`. Os endpoints estarão a
 ---
 
 ## 8. Considerações Acadêmicas e Autoria
-Projeto desenvolvido por **Leonardo da Silva Nóbrega** no âmbito acadêmico do curso de **Desenvolvimento de Software Multiplataforma (DSM)**. Destina-se ao estudo, validação e aplicação prática de conceitos avançados de engenharia de software para a web, arquiteturas de microsserviços e persistência heterogênea.
+Projeto desenvolvido por **Leonardo Nóbrega** no âmbito acadêmico do curso de **Desenvolvimento de Software Multiplataforma (DSM)**. Destina-se ao estudo, validação e aplicação prática de conceitos avançados de engenharia de software para a web, arquiteturas de microsserviços e persistência heterogênea.
