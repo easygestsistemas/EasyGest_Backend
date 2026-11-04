@@ -1,7 +1,10 @@
 package com.easygest.springboot.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -67,16 +70,34 @@ public class SecurityConfig {
      * Politica CORS que permite o preflight OPTIONS e chamadas cross-origin.
      * Complementa o CorsConfig ja existente, mantendo compatibilidade com
      * @CrossOrigin e com as origens configuradas por EASYGEST_CORS_ALLOWED_ORIGINS.
+     * Libera tambem qualquer porta de localhost e 127.0.0.1 para desenvolvimento local (npm run dev).
      */
     @Bean
-    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+    public UrlBasedCorsConfigurationSource corsConfigurationSource(
+            @Value("${EASYGEST_CORS_ALLOWED_ORIGINS:https://easygesterp.vercel.app,https://*.vercel.app,http://localhost:*,http://127.0.0.1:*}") String allowedOrigins) {
         CorsConfiguration configuracao = new CorsConfiguration();
-        configuracao.setAllowedOrigins(List.of("https://easygesterp.vercel.app"));
+
+        List<String> origins = new ArrayList<>(
+                Arrays.stream(allowedOrigins.split(","))
+                        .map(String::trim)
+                        .filter(origin -> !origin.isEmpty())
+                        .toList()
+        );
+
+        // Garante que localhost e 127.0.0.1 em qualquer porta estejam sempre liberados (npm run dev)
+        if (!origins.contains("http://localhost:*")) {
+            origins.add("http://localhost:*");
+        }
+        if (!origins.contains("http://127.0.0.1:*")) {
+            origins.add("http://127.0.0.1:*");
+        }
+
+        configuracao.setAllowedOriginPatterns(origins);
         configuracao.setAllowedMethods(
                 List.of(HttpMethod.GET.name(), HttpMethod.POST.name(),
                         HttpMethod.PUT.name(), HttpMethod.DELETE.name(),
                         HttpMethod.OPTIONS.name(), HttpMethod.PATCH.name()));
-        configuracao.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuracao.setAllowedHeaders(List.of("*"));
         configuracao.setAllowCredentials(true);
         configuracao.setMaxAge(3600L);
 
@@ -86,9 +107,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, UrlBasedCorsConfigurationSource corsConfigurationSource) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .csrf(csrf -> csrf.disable()) // stateless: nao e necessario CSRF
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth

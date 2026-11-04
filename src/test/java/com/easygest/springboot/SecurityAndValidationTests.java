@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Testes de seguranca (sem JWT).
  * Cenarios cobertos:
  *  - /health disponivel sem autenticacao (health check do Render)
- *  - preflight CORS (OPTIONS) disponivel sem autenticacao
+ *  - preflight CORS (OPTIONS) disponivel sem autenticacao para Vercel e localhost
  *  - endpoint protegido sem autenticacao retorna 401
  *  - credenciais incorretas sao rejeitadas com 401
  *  - payload invalido enviado com autenticacao retorna 400
@@ -71,6 +71,30 @@ class SecurityAndValidationTests {
                 .andExpect(status().isOk())
                 .andExpect(header().string(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,
                         "https://easygest.vercel.app"));
+    }
+
+    @Test
+    @DisplayName("Preflight CORS para localhost (npm run dev no Vite port 5173)")
+    void corsPreflightLocalhostViteAvailable() throws Exception {
+        mockMvc.perform(options("/produtos")
+                        .header(HttpHeaders.ORIGIN, "http://localhost:5173")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, "GET")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS, "authorization,content-type"))
+                .andExpect(status().isOk())
+                .andExpect(header().string(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,
+                        "http://localhost:5173"));
+    }
+
+    @Test
+    @DisplayName("Preflight CORS para localhost (npm run dev em outra porta como 3000)")
+    void corsPreflightLocalhost3000Available() throws Exception {
+        mockMvc.perform(options("/produtos")
+                        .header(HttpHeaders.ORIGIN, "http://localhost:3000")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, "POST")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS, "authorization,content-type"))
+                .andExpect(status().isOk())
+                .andExpect(header().string(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,
+                        "http://localhost:3000"));
     }
 
     @Test
