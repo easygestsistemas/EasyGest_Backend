@@ -2,11 +2,14 @@ package com.easygest.springboot;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Optional;
 
 import com.easygest.springboot.model.Fornecedor;
 import com.easygest.springboot.model.Funcionario;
+import com.easygest.springboot.model.Produto;
 import com.easygest.springboot.repository.FornecedorRepository;
 import com.easygest.springboot.repository.FuncionarioRepository;
+import com.easygest.springboot.repository.ProdutoRepository;
 import org.mockito.ArgumentCaptor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,10 +25,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -65,6 +70,9 @@ class SecurityAndValidationTests {
 
     @MockitoBean
     private FuncionarioRepository funcionarioRepository;
+
+    @MockitoBean
+    private ProdutoRepository produtoRepository;
 
     private String headerBasic(String usuario, String senha) {
         String token = Base64.getEncoder()
@@ -262,5 +270,93 @@ class SecurityAndValidationTests {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value(
                         "Corpo da requisição inválido. Verifique o JSON, as datas e os valores informados."));
+    }
+
+    @Test
+    @DisplayName("PUT e GET de produto retornam fornecedor resolvido pelo código")
+    void produtoAtualizadoEConsultadoComFornecedor() throws Exception {
+        Fornecedor fornecedor = new Fornecedor();
+        fornecedor.setCodFornecedor("forn-1");
+        fornecedor.setRazaoSocialFornecedor("Fornecedor ABC Ltda");
+        fornecedor.setNomeFornecedor("Fornecedor ABC Ltda");
+        fornecedor.setCnpjFornecedor("12345678000199");
+
+        Produto produto = new Produto();
+        produto.setCodProduto("prod-1");
+        produto.setNomeProduto("Produto");
+        when(produtoRepository.findById("prod-1")).thenReturn(Optional.of(produto));
+        when(fornecedorRepository.findById("forn-1")).thenReturn(Optional.of(fornecedor));
+        when(produtoRepository.save(any(Produto.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        mockMvc.perform(put("/produtos/prod-1")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "nomeProduto": "Produto",
+                                  "fornecedor": {"codFornecedor": "forn-1"}
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fornecedor.codFornecedor").value("forn-1"))
+                .andExpect(jsonPath("$.fornecedor.nomeFornecedor").value("Fornecedor ABC Ltda"))
+                .andExpect(jsonPath("$.fornecedor.cnpjFornecedor").doesNotExist());
+
+        mockMvc.perform(get("/produtos/prod-1")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fornecedor.codFornecedor").value("forn-1"))
+                .andExpect(jsonPath("$.fornecedor.nomeFornecedor").value("Fornecedor ABC Ltda"));
+    }
+
+    @Test
+    @DisplayName("Produto sem fornecedor continua sem fornecedor após PUT e GET")
+    void produtoSemFornecedorContinuaSemVinculo() throws Exception {
+        Produto produto = new Produto();
+        produto.setCodProduto("prod-sem-fornecedor");
+        produto.setNomeProduto("Produto avulso");
+        when(produtoRepository.findById("prod-sem-fornecedor")).thenReturn(Optional.of(produto));
+        when(produtoRepository.save(any(Produto.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        mockMvc.perform(put("/produtos/prod-sem-fornecedor")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"nomeProduto": "Produto avulso"}
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fornecedor").value(org.hamcrest.Matchers.nullValue()));
+
+        mockMvc.perform(get("/produtos/prod-sem-fornecedor")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fornecedor").value(org.hamcrest.Matchers.nullValue()));
+
+        verifyNoInteractions(fornecedorRepository);
+    }
+
+    @Test
+    @DisplayName("PUT rejeita fornecedor inexistente com erro 400 claro")
+    void produtoRejeitaFornecedorInexistente() throws Exception {
+        Produto produto = new Produto();
+        produto.setCodProduto("prod-1");
+        produto.setNomeProduto("Produto");
+        when(produtoRepository.findById("prod-1")).thenReturn(Optional.of(produto));
+        when(fornecedorRepository.findById("forn-inexistente")).thenReturn(Optional.empty());
+
+        mockMvc.perform(put("/produtos/prod-1")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "nomeProduto": "Produto",
+                                  "fornecedor": {"codFornecedor": "forn-inexistente"}
+                                }
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(
+                        "Fornecedor não encontrado para codFornecedor: forn-inexistente"));
     }
 }

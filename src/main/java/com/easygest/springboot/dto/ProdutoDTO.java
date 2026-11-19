@@ -13,6 +13,7 @@ public record ProdutoDTO(
         String statusProduto,
         LocalDate dataValidadeProduto,
         BigDecimal quantidadeAtual,
-        Integer estoqueMinimo
+        Integer estoqueMinimo,
+        FornecedorResumoDTO fornecedor
 ) {
 }

@@ -7,7 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.easygest.springboot.dto.FornecedorResumoDTO;
 import com.easygest.springboot.dto.ProdutoDTO;
+import com.easygest.springboot.model.Fornecedor;
 import com.easygest.springboot.model.Produto;
 import com.easygest.springboot.service.ProdutoService;
 
@@ -55,7 +57,24 @@ public class ProdutoController {
                 p.getStatusProduto(),
                 p.getDataValidadeProduto(),
                 p.getQuantidadeAtual(),
-                p.getEstoqueMinimo()
+                p.getEstoqueMinimo(),
+                toFornecedorResumo(p.getFornecedor())
+        );
+    }
+
+    private FornecedorResumoDTO toFornecedorResumo(Fornecedor fornecedor) {
+        if (fornecedor == null) {
+            return null;
+        }
+
+        String nomeFornecedor = fornecedor.getNomeFornecedor();
+        if (nomeFornecedor == null || nomeFornecedor.isBlank()) {
+            nomeFornecedor = fornecedor.getRazaoSocialFornecedor();
+        }
+
+        return new FornecedorResumoDTO(
+                fornecedor.getCodFornecedor(),
+                nomeFornecedor
         );
     }
 
