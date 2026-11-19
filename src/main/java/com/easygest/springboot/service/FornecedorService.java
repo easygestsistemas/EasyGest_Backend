@@ -47,6 +47,9 @@ public class FornecedorService {
     fornecedorExistente.setNomeFornecedor(
             fornecedor.getNomeFornecedor());
 
+    fornecedorExistente.setNomeFantasiaFornecedor(
+            fornecedor.getNomeFantasiaFornecedor());
+
     fornecedorExistente.setCnpjFornecedor(
             fornecedor.getCnpjFornecedor());
 
@@ -58,6 +61,9 @@ public class FornecedorService {
 
     fornecedorExistente.setEmailFornecedor(
             fornecedor.getEmailFornecedor());
+
+    fornecedorExistente.setCategoriaFornecedor(
+            fornecedor.getCategoriaFornecedor());
 
     fornecedorExistente.setDataCadastroFornecedor(
             fornecedor.getDataCadastroFornecedor());

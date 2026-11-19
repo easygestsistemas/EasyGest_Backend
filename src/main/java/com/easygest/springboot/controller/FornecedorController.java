@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.easygest.springboot.dto.FornecedorDTO;
+import com.easygest.springboot.dto.FornecedorRequest;
 import com.easygest.springboot.model.Fornecedor;
 import com.easygest.springboot.service.FornecedorService;
 
@@ -33,8 +34,8 @@ public class FornecedorController {
 
     @PostMapping
     public FornecedorDTO salvar(
-            @Valid @RequestBody Fornecedor fornecedor) {
-        return toDto(service.salvar(fornecedor));
+            @Valid @RequestBody FornecedorRequest request) {
+        return toDto(service.salvar(request.toModel()));
     }
 
     @PutMapping("/{codFornecedor}")

@@ -23,10 +23,12 @@ public class Fornecedor {
     @NotBlank(message = "A razão social do fornecedor é obrigatória.")
     private String razaoSocialFornecedor;
     private String nomeFornecedor;
+    private String nomeFantasiaFornecedor;
     private String cnpjFornecedor;
     private String enderecoFornecedor;
     private String telefoneFornecedor;
     @Email(message = "O e-mail do fornecedor deve ser válido.")
     private String emailFornecedor;
+    private String categoriaFornecedor;
     private LocalDate dataCadastroFornecedor;
 }

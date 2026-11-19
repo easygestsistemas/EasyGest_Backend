@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.easygest.springboot.dto.FuncionarioDTO;
+import com.easygest.springboot.dto.FuncionarioRequest;
 import com.easygest.springboot.model.Funcionario;
 import com.easygest.springboot.service.FuncionarioService;
 
@@ -33,8 +34,8 @@ public class FuncionarioController {
 
     @PostMapping
     public FuncionarioDTO salvar(
-            @Valid @RequestBody Funcionario funcionario) {
-        return toDto(service.salvar(funcionario));
+            @Valid @RequestBody FuncionarioRequest request) {
+        return toDto(service.salvar(request.toModel()));
     }
 
     @PutMapping("/{codFuncionario}")

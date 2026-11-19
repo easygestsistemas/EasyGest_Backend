@@ -3,6 +3,11 @@ package com.easygest.springboot;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+import com.easygest.springboot.model.Fornecedor;
+import com.easygest.springboot.model.Funcionario;
+import com.easygest.springboot.repository.FornecedorRepository;
+import com.easygest.springboot.repository.FuncionarioRepository;
+import org.mockito.ArgumentCaptor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +16,17 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -47,6 +59,12 @@ class SecurityAndValidationTests {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockitoBean
+    private FornecedorRepository fornecedorRepository;
+
+    @MockitoBean
+    private FuncionarioRepository funcionarioRepository;
 
     private String headerBasic(String usuario, String senha) {
         String token = Base64.getEncoder()
@@ -125,5 +143,124 @@ class SecurityAndValidationTests {
                                 }
                                 """))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("Cadastro de fornecedor aceita os nomes enviados pelo formulário")
+    void cadastroFornecedorComPayloadDoFrontend() throws Exception {
+        when(fornecedorRepository.save(any(Fornecedor.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        mockMvc.perform(post("/fornecedores")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "nomeFornecedor": "Razão Social Ltda",
+                                  "nomeFantasiaFornecedor": "Nome Fantasia",
+                                  "cnpjFornecedor": "12345678000199",
+                                  "telefoneFornecedor": "11999999999",
+                                  "emailFornecedor": "contato@example.com",
+                                  "categoriaFornecedor": "Alimentos",
+                                  "dataCadastro": "2026-11-18"
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.razaoSocialFornecedor").value("Razão Social Ltda"));
+
+        ArgumentCaptor<Fornecedor> fornecedorCaptor = ArgumentCaptor.forClass(Fornecedor.class);
+        verify(fornecedorRepository).save(fornecedorCaptor.capture());
+        Fornecedor salvo = fornecedorCaptor.getValue();
+        assertEquals("Razão Social Ltda", salvo.getRazaoSocialFornecedor());
+        assertEquals("Nome Fantasia", salvo.getNomeFantasiaFornecedor());
+        assertEquals("Alimentos", salvo.getCategoriaFornecedor());
+        assertEquals("2026-11-18", salvo.getDataCadastroFornecedor().toString());
+        assertNull(salvo.getEnderecoFornecedor());
+    }
+
+    @Test
+    @DisplayName("Fornecedor sem razão social ou com e-mail inválido retorna 400 detalhado")
+    void fornecedorComCamposObrigatoriosOuInvalidosRetorna400() throws Exception {
+        mockMvc.perform(post("/fornecedores")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "nomeFornecedor": " ",
+                                  "emailFornecedor": "email-invalido"
+                                }
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors.nomeFornecedor").exists())
+                .andExpect(jsonPath("$.errors.emailFornecedor").exists());
+    }
+
+    @Test
+    @DisplayName("Cadastro de funcionário não depende de usuario enviado pelo cliente")
+    void cadastroFuncionarioSemUsuario() throws Exception {
+        when(funcionarioRepository.save(any(Funcionario.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        mockMvc.perform(post("/funcionarios")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "nomeFuncionario": "Maria Silva",
+                                  "cpfFuncionario": "12345678900",
+                                  "ctpsFuncionario": "12345",
+                                  "cargoFuncionario": "Vendedora",
+                                  "salarioFuncionario": 2500.00,
+                                  "dataAdmissaoFuncionario": "2026-11-01",
+                                  "dataDemissaoFuncionario": null,
+                                  "usuario": {"codUsuario": "id-arbitrario-do-cliente"}
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nomeFuncionario").value("Maria Silva"));
+
+        ArgumentCaptor<Funcionario> funcionarioCaptor = ArgumentCaptor.forClass(Funcionario.class);
+        verify(funcionarioRepository).save(funcionarioCaptor.capture());
+        Funcionario salvo = funcionarioCaptor.getValue();
+        assertNull(salvo.getUsuario());
+        assertEquals("Maria Silva", salvo.getNomeFuncionario());
+        assertEquals("2500.00", salvo.getSalarioFuncionario().toString());
+        assertEquals("2026-11-01", salvo.getDataAdmissaoFuncionario().toString());
+    }
+
+    @Test
+    @DisplayName("Funcionário sem nome/cargo ou com salário negativo retorna 400 detalhado")
+    void funcionarioComCamposObrigatoriosOuInvalidosRetorna400() throws Exception {
+        mockMvc.perform(post("/funcionarios")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "nomeFuncionario": " ",
+                                  "cargoFuncionario": "",
+                                  "salarioFuncionario": -1
+                                }
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors.nomeFuncionario").exists())
+                .andExpect(jsonPath("$.errors.cargoFuncionario").exists())
+                .andExpect(jsonPath("$.errors.salarioFuncionario").exists());
+    }
+
+    @Test
+    @DisplayName("Data de cadastro com formato inválido retorna 400")
+    void dataInvalidaRetorna400Claro() throws Exception {
+        mockMvc.perform(post("/fornecedores")
+                        .header(HttpHeaders.AUTHORIZATION, headerBasic(USUARIO_TESTE, SENHA_TESTE))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "nomeFornecedor": "Razão Social Ltda",
+                                  "dataCadastro": "18/11/2026"
+                                }
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(
+                        "Corpo da requisição inválido. Verifique o JSON, as datas e os valores informados."));
     }
 }
